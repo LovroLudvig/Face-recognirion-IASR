@@ -26,14 +26,4 @@ class NeuralNetwork:
     def classify(self, input):
         hiddenLayerOutput = LayerOutputCalculator(self.hiddenLayer, input)
         outputLayerOutput = LayerOutputCalculator(self.outputLayer, hiddenLayerOutput.outputActivated)
-        activatedOutputs = outputLayerOutput.outputActivated
-        return outputLayerOutput
-
-
-
-nn = NeuralNetwork(2,5)
-output = nn.classify(np.matrix('1;0'))
-print(nn.hiddenLayer)
-print(nn.outputLayer)
-print(output.outputActivated)
-print(np.where(output.outputActivated == max(output.outputActivated)))
+        return np.where(outputLayerOutput.outputActivated == max(outputLayerOutput.outputActivated))[0][0]
