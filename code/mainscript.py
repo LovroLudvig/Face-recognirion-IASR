@@ -7,4 +7,5 @@ from configure import Config
 if __name__ == "__main__":
     dl = DataLoader(Config().mode)
     dl.load_all_images()
-    dl.all_faces
+    pca = PCA(20, dl.all_faces)
+    print(pca.extract_features(dl.all_faces[0][0], transposed=False))
