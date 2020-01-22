@@ -48,5 +48,5 @@ class DataLoader:
         print("finished loading.")
 
 #USE THIS TO TEST:
-#dl = DataLoader(Config().mode)
-#dl.load_all_images()
+dl = DataLoader(Config().mode)
+dl.load_all_images()
