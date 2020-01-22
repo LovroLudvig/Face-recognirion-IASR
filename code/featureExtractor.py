@@ -1,10 +1,10 @@
 import numpy as np
-from configure import Config
+import configure
 
 class FeatureExtractor():
 
     def __init__(self, eigenfaces_url, average_face_url):
-        self.eigenfaces = np.loadtxt(eigenfaces_url, delimiter=',')[:,:Config().noOfEigenValues]
+        self.eigenfaces = np.loadtxt(eigenfaces_url, delimiter=',')[:,:configure.config_global.noOfEigenValues]
         self.average_face = np.loadtxt(average_face_url, delimiter=',')
 
     def generate_dataset(self, images):
@@ -36,12 +36,10 @@ def generate_transform_matrix(number_of_components, covarience_matrix):
 
 if __name__ == "__main__":
     from DataLoader import DataLoader
-    from configure import Config
-    config = Config()
-    dl = DataLoader(config.modeTrain)
+    dl = DataLoader(configure.config_global.modeTrain)
     dl.load_all_images()
     print("PCA init start")
-    eigenfaces, average_face = extract_eigenfaces(config.noOfEigenValues, dl.all_faces)
+    eigenfaces, average_face = extract_eigenfaces(configure.config_global.noOfEigenValues, dl.all_faces)
     print("PCA end")
     np.savetxt('eigenfaces.csv', eigenfaces, delimiter=',')
     np.savetxt('average_face.csv', average_face, delimiter=',')

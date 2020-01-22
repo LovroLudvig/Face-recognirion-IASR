@@ -1,7 +1,7 @@
 from PIL import Image
 import numpy as np
 import os
-from configure import Config
+import configure
 
 class DataLoaderHelper:
     @staticmethod
@@ -48,6 +48,7 @@ class DataLoader:
 
 if __name__ == "__main__":
     #USE THIS TO TEST:
-    dl = DataLoader(Config().mode)
-    dl.load_all_images()
-    print(dl.all_faces[0])
+    #dl = DataLoader(configure.config_global.modeTrain)
+    #dl.load_all_images()
+    #print(dl.all_faces[0])
+    pass

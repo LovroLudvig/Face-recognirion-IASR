@@ -1,5 +1,5 @@
 import numpy as np
-from configure import Config
+import configure
 
 class SigmoidFunction:
     @staticmethod
@@ -18,10 +18,9 @@ class LayerOutputCalculator:
 class NeuralNetwork:
     def __init__(self, inputLayer, hiddenLayer):
         #Xavier initialization
-        self.config = Config()
         self.inputLayer = inputLayer
         self.hiddenLayer = np.random.randn(hiddenLayer,inputLayer)*np.sqrt(1/inputLayer)
-        self.outputLayer = np.random.randn(self.config.noOfNNOutputs,hiddenLayer)*np.sqrt(1/hiddenLayer)
+        self.outputLayer = np.random.randn(configure.config_global.noOfNNOutputs,hiddenLayer)*np.sqrt(1/hiddenLayer)
 
     def classify(self, input):
         hiddenLayerOutput = LayerOutputCalculator(self.hiddenLayer, input)
@@ -30,9 +29,9 @@ class NeuralNetwork:
 
     def trainNetwork(self, trainingDataset):
         trainingDataset = np.asmatrix(trainingDataset)
-        print("Neural network training started.")
-        for i in range(self.config.noOfEpochs):
-            print("Current epoch: " + str(i))
+        #print("Neural network training started.")
+        for i in range(configure.config_global.noOfEpochs):
+            #print("Current epoch: " + str(i))
             for j in trainingDataset:
                 desiredClass = int(j[0,-1])
                 nnInput = np.transpose(j[0,:-1])
@@ -43,13 +42,13 @@ class NeuralNetwork:
                 outputLayerOutput = LayerOutputCalculator(self.outputLayer, hiddenLayerOutput.outputActivated)
 
                 d2 = np.multiply(np.multiply((desiredOutput-outputLayerOutput.outputActivated),(1-outputLayerOutput.outputActivated)),outputLayerOutput.outputActivated)
-                dw2 = self.config.learningRate * (d2 * np.transpose(hiddenLayerOutput.outputActivated))
+                dw2 = configure.config_global.learningRate * (d2 * np.transpose(hiddenLayerOutput.outputActivated))
                 self.outputLayer += dw2
 
                 d1 = np.multiply(np.multiply((np.transpose(self.outputLayer)* d2),(1-hiddenLayerOutput.outputActivated)),hiddenLayerOutput.outputActivated)
-                dw1 = self.config.learningRate * d1 * np.transpose(nnInput)
+                dw1 = configure.config_global.learningRate * d1 * np.transpose(nnInput)
                 self.hiddenLayer += dw1
-        print("Neural network training done. :)")
+        #print("Neural network training done. :)")
 
 
 
