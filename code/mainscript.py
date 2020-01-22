@@ -1,5 +1,5 @@
 from NeuralNetwork import NeuralNetwork
-from PCA import FeatureExtractor
+from featureExtractor import FeatureExtractor
 from configure import Config
 import numpy as np
 from DataLoader import DataLoader
