@@ -3,12 +3,13 @@ import numpy as np
 class PCA():
 
     def __init__(self, number_of_components, list_of_face_matrices):
+        print("PCA initialization started")
         faces_matrix = np.vstack([face_matrix.flatten() for face_matrix in list_of_face_matrices])
         self.average_face = np.sum(faces_matrix, axis = 0)/np.size(faces_matrix, axis = 0)
         diffrences_matrix = np.vstack([face - self.average_face for face in faces_matrix])
         covarience_matrix = diffrences_matrix.transpose() @ diffrences_matrix
         transform_matrix = PCA._generate_transform_matrix(number_of_components, covarience_matrix)
-        self._transform_matrix = transform_matrix
+        self._transform_matrix = np.transpose(transform_matrix)
         print("PCA initialization done")
 
     @staticmethod
