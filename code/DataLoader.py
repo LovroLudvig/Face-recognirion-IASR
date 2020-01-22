@@ -17,7 +17,7 @@ class DataLoaderHelper:
         return_list = []
         for file_name in file_list:
             with Image.open(file_name) as image:
-                return_list.append(np.array(image) / 255)
+                return_list.append(np.array(image))#/ 255)
         return return_list
 
     @staticmethod

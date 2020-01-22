@@ -16,7 +16,7 @@ class PCA():
     def _generate_transform_matrix(number_of_components, covarience_matrix):
         #TODO: Remove complex values from eigenvalues and eigenvectors
         e_vals, e_vecs = np.linalg.eig(covarience_matrix)
-        return e_vecs[0:number_of_components, :]
+        return np.real(e_vecs[0:number_of_components, :])
 
     def generate_dataset(self, images):
         dataset = []
