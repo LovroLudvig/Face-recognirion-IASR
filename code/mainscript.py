@@ -2,21 +2,25 @@ from NeuralNetwork import NeuralNetwork
 from PCA import PCA
 from configure import Config
 import numpy as np
+from DataLoader import DataLoader
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    print("here")
-    dl = DataLoader(Config().mode)
-    print("here")
-=======
-    dl = DataLoader(Config().modeTrain)
->>>>>>> ddc733d26ec2c7571b24aedbc7de70e52769b5c2
+    config = Config()
+    dl = DataLoader(config.modeTrain)
     dl.load_all_images()
-    pca = PCA(20, dl.all_faces)
-    print(pca.extract_features(dl.all_faces[0], transposed=False))
+    pca = PCA(config.noOfEigenValues, dl.all_faces)
+    dataset = pca.generate_dataset(dl.images)
+    nn = NeuralNetwork(config.noOfEigenValues, config.noOfHidNeur)
+    nn.trainNetwork(dataset)
 
-    dataset = pca.generate_dataset(dl.images)[:10, :]
-    print(dataset)
-    nn = NeuralNetwork(20, 50)
-    print(nn.classify(np.transpose(dataset[0][:-1])))
+    dl = DataLoader(config.modeTest)
+    dl.load_all_images()
+    dataset = pca.generate_dataset(dl.images)
+    
+    print(nn.classify(np.transpose(np.asmatrix(dataset[0][:-1]))))
+    print(nn.classify(np.transpose(np.asmatrix(dataset[1][:-1]))))
+    print(nn.classify(np.transpose(np.asmatrix(dataset[2][:-1]))))
+    print(nn.classify(np.transpose(np.asmatrix(dataset[3][:-1]))))
+    print(nn.classify(np.transpose(np.asmatrix(dataset[4][:-1]))))
+    print(nn.classify(np.transpose(np.asmatrix(dataset[5][:-1]))))

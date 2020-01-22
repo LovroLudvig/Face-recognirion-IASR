@@ -12,7 +12,7 @@ class SigmoidFunction:
 
 class LayerOutputCalculator:
     def __init__(self, weights, input):
-        self.outputNonActivated = weights@input
+        self.outputNonActivated = weights*input
         self.outputActivated = SigmoidFunction.calcSig(self.outputNonActivated)
 
 class NeuralNetwork:
@@ -27,6 +27,35 @@ class NeuralNetwork:
         hiddenLayerOutput = LayerOutputCalculator(self.hiddenLayer, input)
         outputLayerOutput = LayerOutputCalculator(self.outputLayer, hiddenLayerOutput.outputActivated)
         return np.where(outputLayerOutput.outputActivated == max(outputLayerOutput.outputActivated))[0][0]
+
+    def trainNetwork(self, trainingDataset):
+        trainingDataset = np.asmatrix(trainingDataset)
+        print("Neural network training started.")
+        for i in range(self.config.noOfEpochs):
+            print("Current epoch: " + str(i))
+            for j in trainingDataset:
+                desiredClass = int(j[0,-1])
+                nnInput = np.transpose(j[0,:-1])
+                desiredOutput = np.matrix('0;0;0;0;0;0;0')
+                desiredOutput[desiredClass] = 1
+
+                hiddenLayerOutput = LayerOutputCalculator(self.hiddenLayer, nnInput)
+                outputLayerOutput = LayerOutputCalculator(self.outputLayer, hiddenLayerOutput.outputActivated)
+
+                d2 = np.multiply(np.multiply((desiredOutput-outputLayerOutput.outputActivated),(1-outputLayerOutput.outputActivated)),outputLayerOutput.outputActivated)
+                dw2 = self.config.learningRate * (d2 * np.transpose(hiddenLayerOutput.outputActivated))
+                self.outputLayer += dw2
+
+                d1 = np.multiply(np.multiply((np.transpose(self.outputLayer)* d2),(1-hiddenLayerOutput.outputActivated)),hiddenLayerOutput.outputActivated)
+                dw1 = self.config.learningRate * d1 * np.transpose(nnInput)
+                self.hiddenLayer += dw1
+        print("Neural network training done. :)")
+
+
+
+
+
+
 
 if __name__ == "__main__":
     #nothing to test
