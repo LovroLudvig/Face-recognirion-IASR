@@ -7,8 +7,9 @@ class PCA():
         self.average_face = np.sum(faces_matrix, axis = 0)/np.size(faces_matrix, axis = 0)
         diffrences_matrix = np.vstack([face - self.average_face for face in faces_matrix])
         covarience_matrix = diffrences_matrix.transpose() @ diffrences_matrix
-        transform_matrix = _generate_transform_matrix(number_of_components, covarience_matrix)
-        self._transform_matrix = np.transpose(transform_matrix)
+        transform_matrix = PCA._generate_transform_matrix(number_of_components, covarience_matrix)
+        self._transform_matrix = transform_matrix
+        print("PCA initialization done")
 
     @staticmethod
     def _generate_transform_matrix(number_of_components, covarience_matrix):
@@ -33,3 +34,4 @@ class PCA():
 
 if __name__ == "__main__":
     print("No functionality yet")
+    pass

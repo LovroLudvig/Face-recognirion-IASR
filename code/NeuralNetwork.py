@@ -30,3 +30,4 @@ class NeuralNetwork:
 
 if __name__ == "__main__":
     #nothing to test
+    pass

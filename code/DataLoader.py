@@ -38,19 +38,16 @@ class DataLoader:
         self.mode = mode
 
     def load_all_images(self):
-        print("started loading...")
         paths = DataLoaderHelper.getImagePaths(self.mode)
         for i in range(len(paths)):
             file_list = DataLoaderHelper.path_conj(paths[i])
             self.images[i] = DataLoaderHelper.load_images(file_list)
 
         self.all_faces = np.concatenate((self.images[0], self.images[1], self.images[2], self.images[3], self.images[4], self.images[5]))
-        print(len(self.images[0]), len(self.all_faces), len(self.images[6]))
-        print("finished loading.")
 
 
 if __name__ == "__main__":
     #USE THIS TO TEST:
-    #dl = DataLoader(Config().mode)
-    #dl.load_all_images()
-    pass
+    dl = DataLoader(Config().mode)
+    dl.load_all_images()
+    print(dl.all_faces[0])

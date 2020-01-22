@@ -8,6 +8,5 @@ if __name__ == "__main__":
     dl = DataLoader(Config().mode)
     print("here")
     dl.load_all_images()
-    print("here")
     pca = PCA(20, dl.all_faces)
-    print(pca.extract_features())
+    print(pca.extract_features(dl.all_faces[0][0], transposed=False))
