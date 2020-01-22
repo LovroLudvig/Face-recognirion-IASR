@@ -32,8 +32,9 @@ class DataLoaderHelper:
 
 class DataLoader:
     def __init__(self, mode):
+                     # 0   1   2   3   4  u    b
         self.images = [[], [], [], [], [], [], []]
-        self.all_faces = []
+        self.all_faces = [] #0 1 2 3 4 lica
         self.mode = mode
 
     def load_all_images(self):
@@ -47,6 +48,8 @@ class DataLoader:
         print(len(self.images[0]), len(self.all_faces), len(self.images[6]))
         print("finished loading.")
 
-#USE THIS TO TEST:
-dl = DataLoader(Config().mode)
-dl.load_all_images()
+
+if __name__ == "__main__":
+    #USE THIS TO TEST:
+    #dl = DataLoader(Config().mode)
+    #dl.load_all_images()

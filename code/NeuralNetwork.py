@@ -27,3 +27,6 @@ class NeuralNetwork:
         hiddenLayerOutput = LayerOutputCalculator(self.hiddenLayer, input)
         outputLayerOutput = LayerOutputCalculator(self.outputLayer, hiddenLayerOutput.outputActivated)
         return np.where(outputLayerOutput.outputActivated == max(outputLayerOutput.outputActivated))[0][0]
+
+if __name__ == "__main__":
+    print("Nothing to test")
