@@ -53,3 +53,4 @@ if __name__ == "__main__":
     #USE THIS TO TEST:
     #dl = DataLoader(Config().mode)
     #dl.load_all_images()
+    pass
