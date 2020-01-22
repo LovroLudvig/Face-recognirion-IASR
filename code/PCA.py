@@ -18,6 +18,7 @@ class PCA():
         e_vals, e_vecs = np.linalg.eig(covarience_matrix)
         return e_vecs[0:number_of_components, :]
 
+    # generates dataset with number_of_component features and class of image
     def generate_dataset(self, images):
         dataset = []
         for data_class in range(len(images)):
