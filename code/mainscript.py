@@ -14,13 +14,25 @@ if __name__ == "__main__":
     nn = NeuralNetwork(config.noOfEigenValues, config.noOfHidNeur)
     nn.trainNetwork(dataset)
 
+    output_guess = []
+    for sample in dataset:
+        desired = sample[-1]
+        calculated = nn.classify(np.transpose(np.asmatrix(sample[:-1])))
+        output_guess += [desired == calculated]
+    print(sum(output_guess)/np.shape(dataset)[0])
+
+
     dl = DataLoader(config.modeTest)
     dl.load_all_images()
     dataset = fe.generate_dataset(dl.images)
     
-    print(nn.classify(np.transpose(np.asmatrix(dataset[0][:-1]))))
-    print(nn.classify(np.transpose(np.asmatrix(dataset[1][:-1]))))
-    print(nn.classify(np.transpose(np.asmatrix(dataset[2][:-1]))))
-    print(nn.classify(np.transpose(np.asmatrix(dataset[3][:-1]))))
-    print(nn.classify(np.transpose(np.asmatrix(dataset[4][:-1]))))
-    print(nn.classify(np.transpose(np.asmatrix(dataset[5][:-1]))))
+    output_guess = []
+    for sample in dataset:
+        desired = sample[-1]
+        calculated = nn.classify(np.transpose(np.asmatrix(sample[:-1])))
+        output_guess += [desired == calculated]
+
+    print(sum(output_guess)/np.shape(dataset)[0])
+        
+
+
