@@ -12,7 +12,7 @@ class SigmoidFunction:
 
 class LayerOutputCalculator:
     def __init__(self, weights, input):
-        self.outputNonActivated = weights*input
+        self.outputNonActivated = weights@input
         self.outputActivated = SigmoidFunction.calcSig(self.outputNonActivated)
 
 class NeuralNetwork:
@@ -29,4 +29,4 @@ class NeuralNetwork:
         return np.where(outputLayerOutput.outputActivated == max(outputLayerOutput.outputActivated))[0][0]
 
 if __name__ == "__main__":
-    print("Nothing to test")
+    #nothing to test
