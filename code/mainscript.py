@@ -7,3 +7,4 @@ from configure import Config
 if __name__ == "__main__":
     dl = DataLoader(Config().mode)
     dl.load_all_images()
+    dl.all_faces
