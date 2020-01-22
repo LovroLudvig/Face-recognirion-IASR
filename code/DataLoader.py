@@ -11,10 +11,12 @@ def main():
         face2 = []
         face3 = []
         face4 = []
-        face5= []
+        face5 = []
+        face = [face1, face2, face3, face4, face5]
         unknown_faces = []
         all_faces = []
         background = []
+        paths = []
 
         if config.mode == "training":
             mode = "training"
@@ -24,30 +26,17 @@ def main():
         print("Starting to work...")
 
         # defining the path and directory with images
-        # Face 1
-        pathtrain = "../lfwcrop_grey/izabrana_lica/" + mode + "/lice1/"
-        file_list = path_conj(pathtrain)
-        load_images(file_list, face1)
+        # Face 1 - 5
+        paths.append("../lfwcrop_grey/izabrana_lica/" + mode + "/lice1/")
+        paths.append("../lfwcrop_grey/izabrana_lica/" + mode + "/lice2/")
+        paths.append("../lfwcrop_grey/izabrana_lica/" + mode + "/lice3/")
+        paths.append("../lfwcrop_grey/izabrana_lica/" + mode + "/lice4/")
+        paths.append("../lfwcrop_grey/izabrana_lica/" + mode + "/lice5/")
 
-        # Face 2
-        pathtrain = "../lfwcrop_grey/izabrana_lica/" + mode + "/lice2/"
-        file_list = path_conj(pathtrain)
-        load_images(file_list, face2)
-
-        #Face 3
-        pathtrain = "../lfwcrop_grey/izabrana_lica/" + mode + "/lice3/"
-        file_list = path_conj(pathtrain)
-        load_images(file_list, face3)
-
-        #Face 4
-        pathtrain = "../lfwcrop_grey/izabrana_lica/" + mode + "/lice4/"
-        file_list = path_conj(pathtrain)
-        load_images(file_list, face4)
-
-        # Face 5
-        pathtrain = "../lfwcrop_grey/izabrana_lica/" + mode + "/lice5/"
-        file_list = path_conj(pathtrain)
-        load_images(file_list, face5)
+        for i in paths:
+            print(i)
+            file_list = path_conj(i)
+            load_images(file_list, face[paths.index(i)])
 
         # Unknown faces
         pathtrain = "../lfwcrop_grey/izabrana_lica/" + mode + "/unknown_lica/"
@@ -61,7 +50,7 @@ def main():
 
         # All faces
         all_faces = np.concatenate((face1, face2, face3, face4, face5, unknown_faces))
-        print(len(face1), len(all_faces), len(background))
+        print(len(face1), len(unknown_faces), len(all_faces), len(background))
 
 def path_conj(pathname):
     pathtrain = pathname
