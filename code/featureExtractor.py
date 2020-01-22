@@ -1,9 +1,10 @@
 import numpy as np
+from configure import Config
 
 class FeatureExtractor():
 
     def __init__(self, eigenfaces_url, average_face_url):
-        self.eigenfaces = np.loadtxt(eigenfaces_url, delimiter=',')
+        self.eigenfaces = np.loadtxt(eigenfaces_url, delimiter=',')[:,:Config().noOfEigenValues]
         self.average_face = np.loadtxt(average_face_url, delimiter=',')
 
     def generate_dataset(self, images):
