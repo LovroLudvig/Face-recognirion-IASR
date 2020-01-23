@@ -22,13 +22,13 @@ class DataLoaderHelper:
 
     @staticmethod
     def getImagePaths(mode):
-        return ["../lfwcrop_grey/izabrana_lica/" + mode + "/lice1/",
-            "../lfwcrop_grey/izabrana_lica/" + mode + "/lice2/",
-            "../lfwcrop_grey/izabrana_lica/" + mode + "/lice3/",
-            "../lfwcrop_grey/izabrana_lica/" + mode + "/lice4/",
-            "../lfwcrop_grey/izabrana_lica/" + mode + "/lice5/",
-            "../lfwcrop_grey/izabrana_lica/" + mode + "/unknown_lica/",
-            "../lfwcrop_grey/izabrana_lica/" + mode + "/resized background 64x64/"]
+        return ["../lfwcrop_grey/izabrana_lica2/" + mode + "/lice1/",
+            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice2/",
+            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice3/",
+            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice4/",
+            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice5/",
+            "../lfwcrop_grey/izabrana_lica2/" + mode + "/unknown_lica/",
+            "../lfwcrop_grey/izabrana_lica2/" + mode + "/resized background 64x64/"]
 
 class DataLoader:
     def __init__(self, mode):

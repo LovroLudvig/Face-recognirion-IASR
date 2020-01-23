@@ -36,6 +36,7 @@ def generate_transform_matrix(number_of_components, covarience_matrix):
 
 if __name__ == "__main__":
     from DataLoader import DataLoader
+    configure.setUpConfig(0.05,20,10,500)
     dl = DataLoader(configure.config_global.modeTrain)
     dl.load_all_images()
     print("PCA init start")
