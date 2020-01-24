@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageEnhance
 import numpy as np
 import os
 import configure
@@ -17,7 +17,12 @@ class DataLoaderHelper:
         return_list = []
         for file_name in file_list:
             with Image.open(file_name) as image:
-                return_list.append(np.array(image))#/ 255)
+                # image contrast enhancer
+                im_enh = ImageEnhance.Contrast(image)
+                image = im_enh.enhance(5.0)
+                #im_sharp = ImageEnhance.Sharpness(image)
+                #image = im_sharp.enhance(5.0)
+                return_list.append(np.array(image)/255)
         return return_list
 
     @staticmethod
@@ -26,14 +31,14 @@ class DataLoaderHelper:
             "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice2/",
             "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice3/",
             "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice4/",
-            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice5/",
-            "../lfwcrop_grey/izabrana_lica2/" + mode + "/unknown_lica/",
-            "../lfwcrop_grey/izabrana_lica2/" + mode + "/resized background 64x64/"]
+            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice5/"]
+           # "../lfwcrop_grey/izabrana_lica2/" + mode + "/unknown_lica/",
+            #"../lfwcrop_grey/izabrana_lica2/" + mode + "/resized background 64x64/"]
 
 class DataLoader:
     def __init__(self, mode):
                      # 0   1   2   3   4  u    b
-        self.images = [[], [], [], [], [], [], []]
+        self.images = [[], [], [], [], []]# [], []]
         self.all_faces = [] #0 1 2 3 4 lica
         self.mode = mode
 
@@ -43,7 +48,7 @@ class DataLoader:
             file_list = DataLoaderHelper.path_conj(paths[i])
             self.images[i] = DataLoaderHelper.load_images(file_list)
 
-        self.all_faces = np.concatenate((self.images[0], self.images[1], self.images[2], self.images[3], self.images[4], self.images[5]))
+        self.all_faces = np.concatenate((self.images[0], self.images[1], self.images[2], self.images[3], self.images[4]))# self.images[5]))
 
 
 if __name__ == "__main__":

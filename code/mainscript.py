@@ -12,7 +12,8 @@ import configure
 #(0.1, 300, 100, 30)
 #0.6
 
-configure.setUpConfig(0.1, 50, 60, 30)
+# (learningRate, noOfEpochs, noOfHidNeur, noOfEigenValues)
+configure.setUpConfig(0.05, 1000, 50, 50)
 fe = FeatureExtractor("eigenfaces.csv", "average_face.csv")
 
 #prepare data for training:
@@ -34,11 +35,11 @@ for sample in dataset:
     desired = sample[-1]
     calculated = nn.classify(np.transpose(np.asmatrix(sample[:-1])))
     output_guess += [desired == calculated]
+    print(sum(output_guess) / np.shape(dataset)[0])
 
+print("testing data:", sum(output_guess)/np.shape(dataset)[0])
 
-print(sum(output_guess)/np.shape(dataset)[0])
-
-#prepare data for testing:
+#prepare data for training data results:
 dl = DataLoader(configure.config_global.modeTrain)
 dl.load_all_images()
 dataset = fe.generate_dataset(dl.images)
@@ -48,6 +49,6 @@ for sample in dataset:
     desired = sample[-1]
     calculated = nn.classify(np.transpose(np.asmatrix(sample[:-1])))
     output_guess += [desired == calculated]
+    #print(sum(output_guess) / np.shape(dataset)[0])
 
-
-print(sum(output_guess)/np.shape(dataset)[0])
+print("training data result: ", sum(output_guess)/np.shape(dataset)[0])

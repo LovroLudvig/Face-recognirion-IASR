@@ -31,11 +31,11 @@ class NeuralNetwork:
         trainingDataset = np.asmatrix(trainingDataset)
         #print("Neural network training started.")
         for i in range(configure.config_global.noOfEpochs):
-            #print("Current epoch: " + str(i))
+            print("Current epoch: " + str(i))
             for j in trainingDataset:
                 desiredClass = int(j[0,-1])
                 nnInput = np.transpose(j[0,:-1])
-                desiredOutput = np.matrix('0;0;0;0;0;0;0')
+                desiredOutput = np.matrix('0;0;0;0;0')
                 desiredOutput[desiredClass] = 1
 
                 hiddenLayerOutput = LayerOutputCalculator(self.hiddenLayer, nnInput)

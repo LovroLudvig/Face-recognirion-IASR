@@ -2,7 +2,7 @@ class Config:
     def __init__(self, learningRate, noOfEpochs, noOfHidNeur, noOfEigenValues):
         self.modeTrain = "training"
         self.modeTest = "testing"
-        self.noOfNNOutputs = 7
+        self.noOfNNOutputs = 5
         self.learningRate = learningRate
         self.noOfEpochs = noOfEpochs
         self.noOfHidNeur = noOfHidNeur
