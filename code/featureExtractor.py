@@ -8,11 +8,12 @@ from DataLoader import DataLoaderHelper
 class FeatureExtractor():
 
     def __init__(self, eigenfaces_url, average_face_url):
-        self.eigenfaces = np.loadtxt(eigenfaces_url, delimiter=',')[:, -(configure.config_global.noOfEigenValues+1): -1]
+        self.eigenfaces = np.loadtxt(eigenfaces_url, delimiter=',')
         self.average_face = np.loadtxt(average_face_url, delimiter=',')
 
     def generate_dataset(self, images):
         dataset = []
+        self.features_reduced = self.eigenfaces[:, -configure.config_global.noOfEigenValues:]
         for data_class in range(len(images)):
             class_images = images[data_class]
             for image in class_images:
@@ -21,7 +22,7 @@ class FeatureExtractor():
         return np.vstack(dataset)
 
     def extract_features(self, image_matrix, **kwargs):
-        features = (image_matrix.flatten() - self.average_face) @ self.eigenfaces
+        features = (image_matrix.flatten() - self.average_face) @ self.features_reduced
         if kwargs['transposed'] == True:
             return np.transpose(features)
         return features

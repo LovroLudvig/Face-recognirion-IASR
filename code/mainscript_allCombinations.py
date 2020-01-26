@@ -11,14 +11,13 @@ import configure
 #0.5714285714285714
 #(0.1, 300, 100, 30)
 #0.6
-
+fe = FeatureExtractor("generatedData/eigenfaces.csv", "generatedData/average_face.csv")
 best = 0.0
 for lr in range(4, 7, 1):
     for ne in range(380, 421, 5):
         for nhn in range(40, 91, 10):
             for nev in range(50, 91, 10):
                 configure.setUpConfig(lr/100, ne, nhn, nev)
-                fe = FeatureExtractor("generatedData/eigenfaces.csv", "generatedData/average_face.csv")
 
                 #prepare data for training:
                 dl = DataLoader(configure.config_global.modeTrain)
