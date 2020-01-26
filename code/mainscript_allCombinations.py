@@ -13,10 +13,10 @@ import configure
 #0.6
 
 best = 0.0
-for lr in range(5, 21, 5):
-    for ne in range(20, 521, 50):
-        for nhn in range(10, 101, 10):
-            for nev in range(10, 101, 10):
+for lr in range(4, 7, 1):
+    for ne in range(380, 421, 5):
+        for nhn in range(40, 91, 10):
+            for nev in range(50, 91, 10):
                 configure.setUpConfig(lr/100, ne, nhn, nev)
                 fe = FeatureExtractor("generatedData/eigenfaces.csv", "generatedData/average_face.csv")
 
