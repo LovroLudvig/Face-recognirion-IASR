@@ -3,6 +3,7 @@ import configure
 from PIL import Image
 from matplotlib import pyplot as plt
 from numpy import linalg as LA
+from DataLoader import DataLoaderHelper
 
 class FeatureExtractor():
 
@@ -26,27 +27,18 @@ class FeatureExtractor():
         return features
 
 def extract_eigenfaces(number_of_eigenfaces, list_of_face_matrices):
-    faces_matrix = np.vstack([face_matrix.flatten() for face_matrix in list_of_face_matrices]) # flatten 2d image and stack into matrix
+    # flatten 2d image and stack into matrix
+    faces_matrix = np.vstack([face_matrix.flatten() for face_matrix in list_of_face_matrices])
+    # sum all images vertically and divide by num_of_images
     average_face = np.sum(faces_matrix, axis = 0)/np.size(faces_matrix, axis = 0)
+    # subtract average_face from all faces in faces_matrix
     diffrences_matrix = np.vstack([face - average_face for face in faces_matrix])
-
-    average_face2 = np.expand_dims(average_face, axis=0)
-    newpic = average_face2*255
-    newpic = newpic.reshape(64,64).astype(np.uint8)
-    Image.fromarray(newpic).save("pictures/avg.png")
-    print("average face saved.")
-
+    DataLoaderHelper.save_image(average_face, "avg_face")
     covarience_matrix = np.cov(diffrences_matrix.T)
     eigen_val, eigen_vecs = LA.eigh(covarience_matrix)
-
     for i in range (1,20):
-        img = np.expand_dims(eigen_vecs[:,-i], axis=0)
-        img = (img+np.amin(eigen_vecs))*255
-        Image.fromarray(img.reshape(64,64).astype(np.uint8)).save("pictures/eigen"+str(i)+".png")
-        print("eigenpic saved.")
-
-    eigentrain = eigen_vecs
-    return eigentrain, average_face
+        DataLoaderHelper.save_image(eigen_vecs[:,-i] + np.amin(eigen_vecs), "eigenface"+str(i))
+    return eigen_vecs, average_face
 
 if __name__ == "__main__":
     from DataLoader import DataLoader

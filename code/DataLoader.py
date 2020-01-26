@@ -5,6 +5,15 @@ import configure
 
 class DataLoaderHelper:
     @staticmethod
+    def save_image(image, name):
+        img = image * 255
+        #img = np.expand_dims(image, axis=0) * 255
+        Image.fromarray(img.reshape(64, 64).astype(np.uint8)).save("pictures/" + name + ".png")
+        print("image " + name + ".png saved.")
+    # function path_conj(pathname) takes pathname and takes all image names from pathname
+    # directory, and joins them into one path
+    # return list of all paths in pathname directory
+    @staticmethod
     def path_conj(pathname):
         pathtrain = pathname
         filestrain = os.listdir(pathtrain)
@@ -12,6 +21,9 @@ class DataLoaderHelper:
         file_list = train_list_file
         return file_list
 
+    # function load_images(file_list) opens all images from file_list and
+    # preprocesses them with contrast manipulation and normalization
+    # from [0, 255] -> [0, 1]
     @staticmethod
     def load_images(file_list):
         return_list = []
@@ -25,6 +37,8 @@ class DataLoaderHelper:
                 return_list.append(np.array(image)/255)
         return return_list
 
+    # function getImagePaths(mode) takes argument mode = {training, testing}
+    # returns list of paths to faces directories
     @staticmethod
     def getImagePaths(mode):
         return ["../lfwcrop_grey/izabrana_lica2/" + mode + "/lice1/",
