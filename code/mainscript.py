@@ -19,7 +19,7 @@ fe = FeatureExtractor("generatedData/eigenfaces.csv", "generatedData/average_fac
 #prepare data for training:
 dl = DataLoader(configure.config_global.modeTrain)
 dl.load_all_images()
-datasetTrain = fe.generate_dataset(dl.images)
+datasetTrain = fe.generate_dataset(dl.images[:-2] + dl.images[-1:])
 
 #train NN:
 nn = NeuralNetwork(configure.config_global.noOfEigenValues, configure.config_global.noOfHidNeur)

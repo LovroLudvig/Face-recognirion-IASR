@@ -35,7 +35,7 @@ class NeuralNetwork:
             for j in trainingDataset:
                 desiredClass = int(j[0,-1])
                 nnInput = np.transpose(j[0,:-1])
-                desiredOutput = np.matrix('0;0;0;0;0')
+                desiredOutput = np.matrix('0;'*(configure.config_global.noOfNNOutputs-1)+'0')
                 desiredOutput[desiredClass] = 1
 
                 hiddenLayerOutput = LayerOutputCalculator(self.hiddenLayer, nnInput)
