@@ -13,7 +13,7 @@ import configure
 #0.6
 
 # (learningRate, noOfEpochs, noOfHidNeur, noOfEigenValues)
-configure.setUpConfig(0.05, 100, 50, 30)
+configure.setUpConfig(0.05, 500, 100, 100)
 fe = FeatureExtractor("generatedData/eigenfaces.csv", "generatedData/average_face.csv")
 
 #prepare data for training:
