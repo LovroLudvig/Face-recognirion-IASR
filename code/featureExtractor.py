@@ -11,6 +11,7 @@ class FeatureExtractor():
         self.eigenfaces = np.loadtxt(eigenfaces_url, delimiter=',')
         self.average_face = np.loadtxt(average_face_url, delimiter=',')
 
+    #generate dataset of images for neural network
     def generate_dataset(self, images):
         dataset = []
         self.features_reduced = self.eigenfaces[:, -configure.config_global.noOfEigenValues:]
@@ -21,12 +22,14 @@ class FeatureExtractor():
                 dataset += [np.append(features, data_class)]
         return np.vstack(dataset)
 
+    #extract eigen features from images
     def extract_features(self, image_matrix, **kwargs):
         features = (image_matrix.flatten() - self.average_face) @ self.features_reduced
         if kwargs['transposed'] == True:
             return np.transpose(features)
         return features
 
+#creates eigenfaces and average face
 def extract_eigenfaces(number_of_eigenfaces, list_of_face_matrices):
     # flatten 2d image and stack into matrix
     faces_matrix = np.vstack([face_matrix.flatten() for face_matrix in list_of_face_matrices])

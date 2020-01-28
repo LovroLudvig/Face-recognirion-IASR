@@ -4,12 +4,14 @@ import os
 import configure
 
 class DataLoaderHelper:
+    #saves an image
     @staticmethod
     def save_image(image, name):
         img = image * 255
         #img = np.expand_dims(image, axis=0) * 255
         Image.fromarray(img.reshape(64, 64).astype(np.uint8)).save("pictures/" + name + ".png")
         print("image " + name + ".png saved.")
+
     # function path_conj(pathname) takes pathname and takes all image names from pathname
     # directory, and joins them into one path
     # return list of all paths in pathname directory
@@ -41,13 +43,13 @@ class DataLoaderHelper:
     # returns list of paths to faces directories
     @staticmethod
     def getImagePaths(mode):
-        return ["../lfwcrop_grey/izabrana_lica2/" + mode + "/lice1/",
-            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice2/",
-            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice3/",
-            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice4/",
-            "../lfwcrop_grey/izabrana_lica2/" + mode + "/lice5/"]
-           # "../lfwcrop_grey/izabrana_lica2/" + mode + "/unknown_lica/",
-            #"../lfwcrop_grey/izabrana_lica2/" + mode + "/resized background 64x64/"]
+        return ["../lfwcrop_grey/dataset/" + mode + "/face1/",
+            "../lfwcrop_grey/dataset/" + mode + "/face2/",
+            "../lfwcrop_grey/dataset/" + mode + "/face3/",
+            "../lfwcrop_grey/dataset/" + mode + "/face4/",
+            "../lfwcrop_grey/dataset/" + mode + "/face5/"]
+           # "../lfwcrop_grey/dataset/" + mode + "/unknown_faces/",
+            #"../lfwcrop_grey/dataset/" + mode + "/resized background 64x64/"]
 
 class DataLoader:
     def __init__(self, mode):
@@ -66,8 +68,4 @@ class DataLoader:
 
 
 if __name__ == "__main__":
-    #USE THIS TO TEST:
-    #dl = DataLoader(configure.config_global.modeTrain)
-    #dl.load_all_images()
-    #print(dl.all_faces[0])
     pass

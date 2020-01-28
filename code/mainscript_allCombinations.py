@@ -33,13 +33,14 @@ for lr in range(4, 7, 1):
                 dl.load_all_images()
                 dataset = fe.generate_dataset(dl.images)
 
+                #classification:
                 output_guess = []
                 for sample in dataset:
                     desired = sample[-1]
                     calculated = nn.classify(np.transpose(np.asmatrix(sample[:-1])))
                     output_guess += [desired == calculated]
 
-
+                #print configure and success rate if better
                 correct_classifications = sum(output_guess)/np.shape(dataset)[0]
                 if correct_classifications > best:
                     best = correct_classifications

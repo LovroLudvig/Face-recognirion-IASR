@@ -1,0 +1,3 @@
+first run python3 featureExtractor.py
+then run  python3 mainscript.py
+               or mainscript_allCombinations.py
